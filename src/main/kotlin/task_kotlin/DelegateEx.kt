@@ -1,5 +1,6 @@
 package task_kotlin
 
+import mu.KotlinLogging
 import kotlin.concurrent.timer
 import kotlin.reflect.KProperty
 
@@ -8,12 +9,13 @@ private const val NAME = "Timer"
 
 class MyDelegate {
 
+    private val logger = KotlinLogging.logger{}
 
     private var count: Int = 0
 
     init {
         timer(NAME, period = PERIOD) {
-            println("$NAME $count")
+            logger.debug { "$NAME $count" }
             count += 3
         }
     }

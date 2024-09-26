@@ -11,6 +11,9 @@ repositories {
 }
 
 dependencies {
+
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.24")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.26.3")
