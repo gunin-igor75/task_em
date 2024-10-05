@@ -1,14 +1,10 @@
 package task_coroutine
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.Long
 import kotlin.concurrent.scheduleAtFixedRate
-import kotlin.let
 
 
 fun <T> Flow<T>.throttleFirst(windowDuration: Long): Flow<T> = flow {
@@ -23,7 +19,14 @@ fun <T> Flow<T>.throttleFirst(windowDuration: Long): Flow<T> = flow {
 }
 
 
-fun <T> Flow<T>.throttleLatest(windowDuration: Long): Flow<T> {
+fun <T> Flow<T>.throttleLatestNotTimer(period: Long): Flow<T> = this
+    .conflate()
+    .transform {
+        emit(it)
+        delay(period)
+    }
+
+fun <T> Flow<T>.throttleLatestWithTimer(windowDuration: Long): Flow<T> {
     return channelFlow {
         var lastValue: T?
         var timer: Timer? = null
@@ -52,3 +55,4 @@ fun <T> Flow<T>.throttleLatest(windowDuration: Long): Flow<T> {
         }
     }
 }
+
