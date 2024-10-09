@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "1.9.20"
     application
 }
 
@@ -11,7 +11,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+    implementation("io.github.hoc081098:FlowExt:1.0.0")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.24")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.assertj:assertj-core:3.26.3")
+    testImplementation ("org.junit.jupiter:junit-jupiter-params:5.1.0")
 }
 
 tasks.test {
